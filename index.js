@@ -13,9 +13,7 @@ async function loadCookies(filePath) {
 }
 
 async function run() {
-  const browser = await puppeteer.launch({
-    headless: false, // Set headless to false to open browser
-  });
+  const browser = await puppeteer.launch();
 
   const page = await browser.newPage();
 
@@ -33,7 +31,7 @@ async function run() {
   while (true) {
     try {
       // Navigate to the target URL
-      await page.goto(targetUrl, { waitUntil: 'networkidle0' });
+      await page.goto(targetUrl, { waitUntil: 'load' });
 
       if (page.url().includes('login')) {
         console.log('Session is out');
